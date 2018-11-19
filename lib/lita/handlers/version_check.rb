@@ -20,17 +20,17 @@ module Lita
       #   e.g. lita-version-check 0.1.0
       #
       def gemspec_version
-        # list all installed gems in this context and filter for the one named
-        #   version check
+        # - list all installed gems in this context and filter for the one named
+        #   version check,
+        # - strip out all characters other than alphanumerics and . - and space.
+        # - trim leading and trailing whitespace
+        # - split on whitespace
+        # - join the split tokens back together with a uniform single space
         `bundle list | grep lita-version-check`
-        # strip out all characters other than alphanumerics and . - and space.
-        .gsub(/[^A-Za-z0-9\.\- ]/i, '')
-        # trim leading and trailing whitespace
+        .gsub(/[^A-Za-z0-9\.\- ]/i, '') 
         .strip
-        # split on whitespace
         .split
-        # join the split tokens back together with a uniform single space
-        .join(" ")
+        .join(' ')
       end
       # END:gemspec_version
 
